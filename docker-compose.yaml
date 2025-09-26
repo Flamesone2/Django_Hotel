@@ -1,0 +1,40 @@
+#version: '3.8'
+#
+#services:
+#  web:
+#    build: .
+#    ports:
+#      - "8000:8000"
+#    volumes:
+#      - .:/app          # монтирует весь корень (включая подпапку)
+#    depends_on:
+#      - db
+#    environment:
+#      - DATABASE_URL=postgresql://user:pass@db:5432/hoteldb
+#      - DEBUG=1
+#
+#  db:
+#    image: postgres:15
+#    volumes:
+#      - postgres_/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_DB: hoteldb
+#      POSTGRES_USER: user
+#      POSTGRES_PASSWORD: pass
+#
+#volumes:
+#  postgres_:
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: hoteldb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+
+volumes:
+  postgres_:
