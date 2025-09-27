@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from hotels.views import RoomsAPIViev, RoomReservationsAPIViev
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/v1/roomslist", RoomsAPIViev.as_view()),
+    path("api/v1/roomreservationslist", RoomReservationsAPIViev.as_view())
 ]
