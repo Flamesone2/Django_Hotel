@@ -2,13 +2,13 @@ FROM python:3.12.3-slim
 
 WORKDIR /app
 
-# Копируем зависимости
+
 COPY poetry.lock pyproject.toml ./
 RUN pip install poetry && \
     poetry config virtualenvs.create false && \
-    poetry install --only=main
+    poetry install --only=main --no-root
 
-# Копируем весь код (включая manage.py)
+
 COPY . .
 
 EXPOSE 8000
