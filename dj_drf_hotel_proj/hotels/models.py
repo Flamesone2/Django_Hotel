@@ -11,6 +11,6 @@ class Room(models.Model):
 
 class RoomReservation(models.Model):
     booking_id = models.AutoField(primary_key=True)
-    room_id = models.ForeignKey("Room" ,on_delete=models.CASCADE)
+    room = models.ForeignKey("Room", on_delete=models.CASCADE)
     date_start = models.DateField()
     date_end = models.DateField()
