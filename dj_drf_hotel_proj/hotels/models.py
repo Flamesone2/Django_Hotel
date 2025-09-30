@@ -6,6 +6,8 @@ class Room(models.Model):
     room_number = models.CharField(max_length=10)
     description = models.CharField(max_length=140)
     price_for_a_night = models.DecimalField(max_digits=8, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="дата добавления номера")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="дата изменения номера")
 
 
 
