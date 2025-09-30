@@ -22,8 +22,8 @@ from hotels.views import (RoomsAPIGetListView,
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/v1/roomslist/", RoomsAPIGetListView.as_view()),
-    path("api/v1/roomreservationslist/", RoomReservationsGetListAPIView.as_view()),
-    path("api/v1/room/<int:room_id>/", RoomDeleteView.as_view()),
-    path("api/v1/roomreservation/<int:booking_id>/", RoomReservationsDeleteView.as_view())
+    path("api/v1/rooms/", RoomsAPIGetListView.as_view()),
+    path("api/v1/roomreservations/", RoomReservationsGetListAPIView.as_view()),
+    path("api/v1/rooms/<int:room_id>/", RoomDeleteView.as_view()),
+    path("api/v1/roomreservations/<int:booking_id>/", RoomReservationsDeleteView.as_view())
 ]
