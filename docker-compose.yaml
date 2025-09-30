@@ -1,19 +1,17 @@
-#
 #services:
 #  db:
-#    image: postgres:15
-#    ports:
-#      - "5432:5432"
+#    image: postgres:17
 #    volumes:
 #      - postgres_:/var/lib/postgresql/data
 #    environment:
 #      POSTGRES_DB: hoteldb
 #      POSTGRES_USER: user
 #      POSTGRES_PASSWORD: pass
-#
-#volumes:
-#  postgres_:
-
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U user -d hoteldb"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
 
 
 services:
@@ -24,7 +22,8 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DATABASE_URL=postgresql://user:pass@db:5432/hoteldb
       - DEBUG=1
@@ -34,13 +33,19 @@ services:
              python dj_drf_hotel_proj/manage.py runserver 0.0.0.0:8000"
 
   db:
-    image: postgres:15
+    image: postgres:17
     volumes:
       - postgres_:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: hoteldb
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d hoteldb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
 volumes:
   postgres_:
